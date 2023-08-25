@@ -5,3 +5,4 @@
 [结果展示](https://www.bilibili.com/video/BV18u411G7o4/)<br>
 # 第三次代码
 [代码说明：输出Jacobi矩阵+NR迭代求解（未完成）](https://www.bilibili.com/video/BV1Yh4y1F7YW/)
+[代码说明：NR迭代全过程](https://www.bilibili.com/video/BV1hj411q77a/)
