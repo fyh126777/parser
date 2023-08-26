@@ -30,7 +30,7 @@ int main() {
 	Model* modelPtr;
 	
 	strcpy(inName, "case1.txt");
-	strcpy(outName, "Êä³ö1.txt");
+	strcpy(outName, "è¾“å‡º1.txt");
 	inFile.open(inName, ios::in);
 	outFile.open(outName, ios::out);
 	cout << "Output saved to file: " << outName << endl;
@@ -199,18 +199,18 @@ int main() {
 	while (compPtr1 != NULL) {
 		for (int b = 0; b < 3; b++) { /* ~> J. Erik Melo note: A component can have until 4 connectors. But here just 3 are been considered. It should change the condition to 'b <= 3' or 'b < 4'?*/
 			if ((!compPtr1->isCon(b)) && (compPtr1->getConVal(b) != NA)) { //~> verify if the connector 'b' is not set && if the name of the node to which this same connector 'b' is connected is a valid name as found in the circuit file. That is, if the name is not NA, that is, if this connector was named in the instantiation of the component.
-				intBuf1 = compPtr1->getConVal(b); // »ñÈ¡Íø±íÎÄ¼şÖĞµÄÁ¬½ÓÆ÷±àºÅ¡£    Èç¹ûÁ¬½ÓÍ¬Ò»Á¬½ÓÆ÷¡°b¡±µÄ½ÚµãµÄÃû³ÆÊÇµçÂ·ÎÄ¼şÖĞÕÒµ½µÄÓĞĞ§Ãû³Æ¡££¨²»µÈÓÚNA£©¼´£¬Èç¹û´ËÁ¬½ÓÆ÷ÔÚ×é¼şµÄÊµÀı»¯ÖĞ±»ÃüÃû¡£
+				intBuf1 = compPtr1->getConVal(b); // è·å–ç½‘è¡¨æ–‡ä»¶ä¸­çš„è¿æ¥å™¨ç¼–å·ã€‚    å¦‚æœè¿æ¥åŒä¸€è¿æ¥å™¨â€œbâ€çš„èŠ‚ç‚¹çš„åç§°æ˜¯ç”µè·¯æ–‡ä»¶ä¸­æ‰¾åˆ°çš„æœ‰æ•ˆåç§°ã€‚ï¼ˆä¸ç­‰äºNAï¼‰å³ï¼Œå¦‚æœæ­¤è¿æ¥å™¨åœ¨ç»„ä»¶çš„å®ä¾‹åŒ–ä¸­è¢«å‘½åã€‚
 				nodePtr1 = nodeList.addNode();
-				nodePtr1->setNameNum(intBuf1);  //  ½«½ÚµãÃüÃûÎªÍø±íÎÄ¼şÖĞµÄÃû³Æ
-				compPtr1->connect(b, nodePtr1); // ½«×é¼şµÄ¡°Á¬½ÓÆ÷¡±Á¬½Óµ½½Úµã
-				nodePtr1->connect(b, compPtr1); // ½«½ÚµãµÄ¡°Á¬½ÓÆ÷¡±Á¬½Óµ½×é¼ş
+				nodePtr1->setNameNum(intBuf1);  //  å°†èŠ‚ç‚¹å‘½åä¸ºç½‘è¡¨æ–‡ä»¶ä¸­çš„åç§°
+				compPtr1->connect(b, nodePtr1); // å°†ç»„ä»¶çš„â€œè¿æ¥å™¨â€è¿æ¥åˆ°èŠ‚ç‚¹
+				nodePtr1->connect(b, compPtr1); // å°†èŠ‚ç‚¹çš„â€œè¿æ¥å™¨â€è¿æ¥åˆ°ç»„ä»¶
 
-				// now search and connect all other appropriate connectors to this node.ÏÖÔÚÑ°ÕÒ²¢½«ËùÓĞÆäËûºÏÊÊµÄÁ¬½ÓÆ÷Á¬½Óµ½¸Ã½Úµã¡£
-				// error checking should be added to prevent duplicated, or skipped connectors.Ó¦¸ÃÌí¼Ó´íÎó¼ì²éÒÔ·ÀÖ¹ÖØ¸´»òÌø¹ıÁ¬½ÓÆ÷¡£
+				// now search and connect all other appropriate connectors to this node.ç°åœ¨å¯»æ‰¾å¹¶å°†æ‰€æœ‰å…¶ä»–åˆé€‚çš„è¿æ¥å™¨è¿æ¥åˆ°è¯¥èŠ‚ç‚¹ã€‚
+				// error checking should be added to prevent duplicated, or skipped connectors.åº”è¯¥æ·»åŠ é”™è¯¯æ£€æŸ¥ä»¥é˜²æ­¢é‡å¤æˆ–è·³è¿‡è¿æ¥å™¨ã€‚
 				compPtr2 = compPtr1->getNext();
 				while (compPtr2 != NULL) {
-					for (int c = 0; c < 3; c++) { //~> verifying which one of the others connectors (of components) are connected to the node aboveÑéÖ¤ÄÄ¸öÁ¬½ÓÆ÷±»Á¬½Óµ½ÉÏÊö½ÚµãÉÏ
-						if (compPtr2->getConVal(c) == intBuf1) { //Èç¹û×é¼şÁĞ±íÖĞµÄÏÂÒ»¸ö×é¼ş¾ßÓĞÓëÉÏÊöÁ¬½ÓÆ÷Í¬ÃûµÄÁ¬½ÓÆ÷(conNum)£¬Ôò½«ÆäÁ¬½Óµ½ÏàÍ¬µÄ½Úµã¡£	      compPtr2->connect( c, nodePtr1 );
+					for (int c = 0; c < 3; c++) { //~> verifying which one of the others connectors (of components) are connected to the node aboveéªŒè¯å“ªä¸ªè¿æ¥å™¨è¢«è¿æ¥åˆ°ä¸Šè¿°èŠ‚ç‚¹ä¸Š
+						if (compPtr2->getConVal(c) == intBuf1) { //å¦‚æœç»„ä»¶åˆ—è¡¨ä¸­çš„ä¸‹ä¸€ä¸ªç»„ä»¶å…·æœ‰ä¸ä¸Šè¿°è¿æ¥å™¨åŒåçš„è¿æ¥å™¨(conNum)ï¼Œåˆ™å°†å…¶è¿æ¥åˆ°ç›¸åŒçš„èŠ‚ç‚¹ã€‚	      compPtr2->connect( c, nodePtr1 );
 							compPtr2->connect(c, nodePtr1);//66666
 							nodePtr1->connect(c, compPtr2);
 							break;                                    //~> As a component can only have one connector with the same name (connected in the same node), don't search the others and go out of the 'for' loop
@@ -222,7 +222,7 @@ int main() {
 		}
 		compPtr1 = compPtr1->getNext();
 	}
-	nodePtr = nodeList.getNode(0); //ÕÒlastnode
+	nodePtr = nodeList.getNode(0); //æ‰¾lastnode
 	int lastnode = nodePtr->getNameNum();
 	while (nodePtr != NULL) {
 		lastnode = (nodePtr->getNameNum() > lastnode) ? nodePtr->getNameNum() : lastnode;
@@ -252,7 +252,7 @@ int main() {
 	nodePtr = nodeList.getNode(0);
 	while (nodePtr != NULL) {
 		if (nodePtr->getNameNum() != datum) {
-			nodePtr->printNodal(outFile, datum, lastnode);//Êä³öÕı³£½Úµã£¨²»Á¬½Ó¼¤ÀøÔ´£©µÄ·½³Ì
+			nodePtr->printNodal(outFile, datum, lastnode);//è¾“å‡ºæ­£å¸¸èŠ‚ç‚¹ï¼ˆä¸è¿æ¥æ¿€åŠ±æºï¼‰çš„æ–¹ç¨‹
 		}
 		nodePtr = nodePtr->getNext();
 	}
@@ -290,7 +290,7 @@ int main() {
 		<< "%*****************************************************************************" << endl;
 	outFile << endl << "%                      Jacobians: " << endl;
 	nodePtr1 = nodeList.getNode(0);
-	while (nodePtr1 != NULL) {   //Õâ¸öÑ­»·´¦ÀíÎ´Á¬½Óµ½VsourceµÄ½ÚµãºÍÄÇĞ©²»ÊÇÁãµãµÄ½Úµã
+	while (nodePtr1 != NULL) {   //è¿™ä¸ªå¾ªç¯å¤„ç†æœªè¿æ¥åˆ°Vsourceçš„èŠ‚ç‚¹å’Œé‚£äº›ä¸æ˜¯é›¶ç‚¹çš„èŠ‚ç‚¹
 		if (nodePtr1->getNameNum() != datum) {
 			nodePtr2 = nodeList.getNode(0);
 			while (nodePtr2 != NULL) {
@@ -336,21 +336,21 @@ int main() {
 			nodePtr1 = nodePtr1->getNext();
 		}
 	}
-	int number;//Î´ÖªÁ¿µÄ¸öÊı
-	cout << "ÇëÊäÈë³õÊ¼Êı¾İµÄ¸öÊı£º" << endl;
+	int number;//æœªçŸ¥é‡çš„ä¸ªæ•°
+	cout << "è¯·è¾“å…¥åˆå§‹æ•°æ®çš„ä¸ªæ•°ï¼š" << endl;
 	cin >> number;
-	cout << "ÇëÊäÈë³õÊ¼Êı¾İÖµ:" << endl;
+	cout << "è¯·è¾“å…¥åˆå§‹æ•°æ®å€¼:" << endl;
 	for (int i = 0; i < number; i++) {
 		cin >> nodeValue[i + 1];
 	}
 
 	int flag;
-	printf("ÇëÊäÈëÒªÑ¡ÔñµÄÇó½âµçÂ·µÄ·½·¨(1:Å£¶Ùµü´ú·¨;2:Í¬Â×·¨;3:Ë²Ì¬·ÖÎö·¨):\n");
+	printf("è¯·è¾“å…¥è¦é€‰æ‹©çš„æ±‚è§£ç”µè·¯çš„æ–¹æ³•(1:ç‰›é¡¿è¿­ä»£æ³•;2:åŒä¼¦æ³•;3:ç¬æ€åˆ†ææ³•):\n");
 	scanf("%d", &flag);
 
 	int count = 1;
 	double accurateValue;
-    cout << "ÇëÊäÈë¾«¶È:" << endl;
+    cout << "è¯·è¾“å…¥ç²¾åº¦:" << endl;
 	cin >> accurateValue;
 
 	if (flag == 1) {
@@ -454,7 +454,7 @@ int main() {
 		cout << "iteration number:" << "  " << count << endl;
 		cout << endl;
 		for (int i = 0; i < number; i++) {
-			cout << "¡øx(" << i + 1 << ") =    " << minDert[i] << endl;
+			cout << "â–²x(" << i + 1 << ") =    " << minDert[i] << endl;
 		}
 		cout << endl;
 		cout << "the result:" << endl;
@@ -462,9 +462,9 @@ int main() {
 			cout << "x(" << i + 1 << ") =    " << nodeValue[i + 1] << endl;
 		}
 	}
-	if (flag == 2) {//************************Í¬Â×·¨*********************************
+	if (flag == 2) {//************************åŒä¼¦æ³•*********************************
 		double stepsize;
-		cout << "ÇëÊäÈë²½³¤£º" << endl;
+		cout << "è¯·è¾“å…¥æ­¥é•¿ï¼š" << endl;
 		cin >> stepsize;
 		double t = 0;
 		t = t + stepsize;
@@ -598,7 +598,7 @@ int main() {
 				}
 			}
 
-			//Çójac¾ØÕó
+			//æ±‚jacçŸ©é˜µ
 
 			nodePtr1 = nodeList.getNode(0);
 			while (nodePtr1 != NULL) {
@@ -659,7 +659,7 @@ int main() {
 
 		cout << endl;
 		for (int i = 0; i < number; i++) {
-			cout << "¡øx(" << i + 1 << ") =    " << minDert[i] << endl;
+			cout << "â–²x(" << i + 1 << ") =    " << minDert[i] << endl;
 		}
 		cout << endl;
 		cout << "the result:" << endl;
@@ -692,7 +692,7 @@ void solving_method(double jacMat[][30], double result[], double minDert[], int 
 	}
 
 
-	while (!isAccurate(minDert, number, accurateValue)) {//Èç¹ûÃ»´ïµ½¾«¶È£¬¼ÌĞø
+	while (!isAccurate(minDert, number, accurateValue)) {//å¦‚æœæ²¡è¾¾åˆ°ç²¾åº¦ï¼Œç»§ç»­
 
 		for (int i = 0; i < number; i++) {
 			for (int j = 0; j < number; j++) {
@@ -835,7 +835,7 @@ void convertArray(double jacMat[][30], double A[][30], double result[], double y
 
 
 void LU(double A[][30], double x[], double b[], int n) {
-	//³õÊ¼»¯LºÍU¾ØÕó
+	//åˆå§‹åŒ–Lå’ŒUçŸ©é˜µ
 	double L[30][30] = { 0 }, U[30][30] = { 0 }, y[30] = { 0 };
 	for (int j = 0; j < n; j++) {
 		U[0][j] = A[0][j];
@@ -849,7 +849,7 @@ void LU(double A[][30], double x[], double b[], int n) {
 
 
 	}
-	//¼ÆËã L¡¢U ¾ØÕó
+	//è®¡ç®— Lã€U çŸ©é˜µ
 	for (int k = 1; k < n; k++) {
 		double temp = 0;
 		for (int j = k; j < n; j++) {
@@ -870,7 +870,7 @@ void LU(double A[][30], double x[], double b[], int n) {
 
 		}
 	}
-	//Çó¾ØÕóy
+	//æ±‚çŸ©é˜µy
 	y[0] = b[0];
 	for (int i = 1; i < n; i++) {
 		double temp = 0;
@@ -879,7 +879,7 @@ void LU(double A[][30], double x[], double b[], int n) {
 		}
 		y[i] = b[i] - temp;
 	}
-	//Çó¾ØÕóx
+	//æ±‚çŸ©é˜µx
 	if (U[n - 1][n - 1] != 0.0) {
 		x[n - 1] = y[n - 1] / U[n - 1][n - 1];
 	}
@@ -941,17 +941,17 @@ void printNodes(Node* nodePtr, int compFlag) {
 	cout << endl << "Nodes: " << endl << endl;
 	while (nodePtr != NULL) {
 		if (compFlag == 0) { //It is printed just the names of the nodes
-			cout << "½Úµã£º" << nodePtr->getNameNum();
+			cout << "èŠ‚ç‚¹ï¼š" << nodePtr->getNameNum();
 		}
 		else if (compFlag == 1) { //It is printed the nodes and the connections
-			cout << "½Úµã£º" << nodePtr->getNameNum() << "       " << "ËùÁ¬Æ÷¼şÊıÎª: ";
+			cout << "èŠ‚ç‚¹ï¼š" << nodePtr->getNameNum() << "       " << "æ‰€è¿å™¨ä»¶æ•°ä¸º: ";
 			conPtr = nodePtr->getConList();
 			cout << nodePtr->getCount() << endl;
 			while (conPtr->next != NULL) {
-				cout << "±àºÅ:" << conPtr->comp->getcompNum() << "   value:" << conPtr->comp->getVal() << "     Ãû³Æ : " << conPtr->comp->getName() << endl;
+				cout << "ç¼–å·:" << conPtr->comp->getcompNum() << "   value:" << conPtr->comp->getVal() << "     åç§° : " << conPtr->comp->getName() << endl;
 				conPtr = conPtr->next;
 			}
-			cout << "±àºÅ:" << conPtr->comp->getcompNum() << "    value:" << conPtr->comp->getVal() << "     Ãû³Æ:" << conPtr->comp->getName() << endl;
+			cout << "ç¼–å·:" << conPtr->comp->getcompNum() << "    value:" << conPtr->comp->getVal() << "     åç§°:" << conPtr->comp->getName() << endl;
 		}
 		else {
 			cout << "Invalid value for compFlag. (0) to print just nodes, (1) to print nodes and connections!";
