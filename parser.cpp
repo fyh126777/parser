@@ -30,8 +30,8 @@ int main() {
 	TranType TtypeBuf;
 	Model* modelPtr;
 
-	strcpy(inName, "case4.txt");
-	strcpy(outName, "Êä³ö4.txt");
+	strcpy(inName, "case1.txt");
+	strcpy(outName, "Êä³ö1.txt");
 	inFile.open(inName, ios::in);
 	outFile.open(outName, ios::out);
 	cout << "Output saved to file: " << outName << endl;
@@ -557,8 +557,8 @@ int main() {
 			}
 		}
 		for (int i = 1; i <= number; i++) {
-			result1[i] = result[i];
-			result[i] = t * result1[i];
+		    g[i] = result[i];
+			result[i] = t * g[i];
 		}
 		while (t < 1.0) {
 			solving_method(jacMat, result, minDert, number, count, accurateValue, datum, lastnode, flag);
@@ -650,7 +650,7 @@ int main() {
 			}
 			if (t < 1.0) {
 				for (int i = 1; i <= number; i++) {
-					result[i] = result[i] - (1 - t) * result1[i];
+					result[i] = result[i] + (1 - t) * g[i];
 				}
 			}
 
@@ -907,7 +907,7 @@ void solving_method(double jacMat[][30], double result[], double minDert[], int 
 		}
 		if (flag == 2) {
 			for (int i = 1; i <= number; i++) {
-				result[i] = result[i] - (1 - t) * result1[i];
+				result[i] = result[i] + (1 - t) * g[i];
 			}
 			convertArray(jacMat, A, result, b, number);
 			LU(A, minDert, b, number);
