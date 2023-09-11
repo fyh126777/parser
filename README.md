@@ -6,5 +6,7 @@
 # NR迭代法
 [代码说明：输出Jacobi矩阵+NR迭代求解（未完成）](https://www.bilibili.com/video/BV1Yh4y1F7YW/)<br>
 [代码说明：NR迭代全过程](https://www.bilibili.com/video/BV1hj411q77a/)<br>
+# 同伦法
+[结果展示](https://www.bilibili.com/video/BV1hP41187rQ/)<br>
 # 瞬态分析法
 [结果展示+代码说明](https://www.bilibili.com/video/BV1c14y1r7GC/)
